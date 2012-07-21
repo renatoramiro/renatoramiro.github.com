@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | RenatoRamiro]]></title>
+  <link href="http://renatoramiro.github.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://renatoramiro.github.com/"/>
+  <updated>2012-07-21T17:18:11-03:00</updated>
+  <id>http://renatoramiro.github.com/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Utilizando helper methods em Rails]]></title>
+    <link href="http://renatoramiro.github.com/blog/2012/07/21/utilizando-helper-methods-em-rails/"/>
+    <updated>2012-07-21T15:59:00-03:00</updated>
+    <id>http://renatoramiro.github.com/blog/2012/07/21/utilizando-helper-methods-em-rails</id>
+    <content type="html"><![CDATA[<p>Esta é uma simples e rápida dica sobre <em>helper methods</em>. Precisei utilizar um método helper porque estava utilizando
+um mesmo trecho de código em vários locais e estava poluindo um pouco minhas views.</p>
+
+<h2>O que é um helper?</h2>
+
+<p>Helpers são trechos de código que podem ser chamados nas nossas views para deixar o código mais DRY (Don't repeat yourself), mais limpo. E utilizá-los é simples. Cada controller tem seu próprio helper ou você pode escrever helpers que serão utilizados em toda a aplicacão (que é o nosso caso).</p>
+
+<p>Exemplo:</p>
+
+<p>```ruby
+def meu_metodo</p>
+
+<pre><code>algum trecho de codigo
+</code></pre>
+
+<p>end
+```</p>
+
+<p>E para utilizá-lo na view, fazemos assim:
+<code>ruby
+&lt;%= meu_metodo %&gt;
+</code></p>
+
+<p>Também é possível colocar parametros no nosso método.
+```ruby
+def meu_metodo(condicao)
+  if condicao</p>
+
+<pre><code>"fazer isso"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>"fazer aquilo"
+</code></pre>
+
+<p>  end
+end
+<code>
+E na view ficaria assim:
+</code>ruby
+&lt;%= meu_metodo(condicao) %>
+```</p>
+
+<h2>Utilização</h2>
+
+<p>Eu tinha isso nas minhas views:
+<code>ruby
+&lt;% @models.each do |my_model| %&gt;
+  &lt;% if my_model.photo? %&gt;
+  &lt;span class="label label-success"&gt;SIM&lt;/span&gt;
+  &lt;% else %&gt;
+  &lt;span class="label label-success"&gt;NÃO&lt;/span&gt;
+  &lt;% end %&gt;
+&lt;% end %&gt;
+</code></p>
+
+<p>Como vamos utilizar nosso helper em várias views, devemos colocar o código no <em>application_helper.rb</em>. E o código ficou assim:
+```ruby
+def has_photo(model)
+  html = ""</p>
+
+<pre><code>if model.photo?
+    html += content_tag :span, "SIM", :class =&gt; "label label-success"
+else
+    html += content_tag :span, "NÃO", :class =&gt; "label label-important"
+end
+html.html_safe
+</code></pre>
+
+<p>end
+```</p>
+
+<p>E na view ficou simplesmente assim:
+<code>ruby
+&lt;% @models.each do |my_model| %&gt;
+  &lt;%= has_photo(my_model) %&gt;
+&lt;% end %&gt;
+</code></p>
+
+<p>E com isso, minhas views ficaram mais simples, limpas.</p>
+
+<p>Para mais detalhes sobre <code>content_tag</code>, é só dar uma olhada na <a href="http://api.rubyonrails.org/">API do Ruby on Rails</a></p>
+
+<p>Pois bem, essa foi uma simples e bem básica dica sobre <em>helper methods</em>. Valews..</p>
+]]></content>
+  </entry>
+  
+</feed>

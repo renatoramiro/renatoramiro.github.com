@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[RenatoRamiro]]></title>
   <link href="http://renatoramiro.github.com/atom.xml" rel="self"/>
   <link href="http://renatoramiro.github.com/"/>
-  <updated>2012-07-21T12:40:12-03:00</updated>
+  <updated>2012-07-21T17:18:11-03:00</updated>
   <id>http://renatoramiro.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,5 +12,124 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Utilizando helper methods em Rails]]></title>
+    <link href="http://renatoramiro.github.com/blog/2012/07/21/utilizando-helper-methods-em-rails/"/>
+    <updated>2012-07-21T15:59:00-03:00</updated>
+    <id>http://renatoramiro.github.com/blog/2012/07/21/utilizando-helper-methods-em-rails</id>
+    <content type="html"><![CDATA[<p>Esta é uma simples e rápida dica sobre <em>helper methods</em>. Precisei utilizar um método helper porque estava utilizando
+um mesmo trecho de código em vários locais e estava poluindo um pouco minhas views.</p>
+
+<h2>O que é um helper?</h2>
+
+<p>Helpers são trechos de código que podem ser chamados nas nossas views para deixar o código mais DRY (Don&#8217;t repeat yourself), mais limpo. E utilizá-los é simples. Cada controller tem seu próprio helper ou você pode escrever helpers que serão utilizados em toda a aplicacão (que é o nosso caso).</p>
+
+<p>Exemplo:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">meu_metodo</span>
+</span><span class='line'>  <span class="n">algum</span> <span class="n">trecho</span> <span class="n">de</span> <span class="n">codigo</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E para utilizá-lo na view, fazemos assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">meu_metodo</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Também é possível colocar parametros no nosso método.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">meu_metodo</span><span class="p">(</span><span class="n">condicao</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">condicao</span>
+</span><span class='line'>    <span class="s2">&quot;fazer isso&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="s2">&quot;fazer aquilo&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E na view ficaria assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;%=</span> <span class="n">meu_metodo</span><span class="p">(</span><span class="n">condicao</span><span class="p">)</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Utilização</h2>
+
+<p>Eu tinha isso nas minhas views:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @models.each </span><span class="k">do</span> <span class="o">|</span><span class="n">my_model</span><span class="o">|</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  &lt;% if my_model.photo? %&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">span</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;label label-success&quot;</span><span class="o">&gt;</span><span class="no">SIM</span><span class="o">&lt;</span><span class="sr">/span&gt;</span>
+</span><span class='line'><span class="sr">  &lt;% else %&gt;</span>
+</span><span class='line'><span class="sr">  &lt;span class=&quot;label label-success&quot;&gt;NÃO&lt;/s</span><span class="n">pan</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Como vamos utilizar nosso helper em várias views, devemos colocar o código no <em>application_helper.rb</em>. E o código ficou assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">has_photo</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">model</span><span class="o">.</span><span class="n">photo?</span>
+</span><span class='line'>      <span class="n">html</span> <span class="o">+=</span> <span class="n">content_tag</span> <span class="ss">:span</span><span class="p">,</span> <span class="s2">&quot;SIM&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;label label-success&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>      <span class="n">html</span> <span class="o">+=</span> <span class="n">content_tag</span> <span class="ss">:span</span><span class="p">,</span> <span class="s2">&quot;NÃO&quot;</span><span class="p">,</span> <span class="ss">:class</span> <span class="o">=&gt;</span> <span class="s2">&quot;label label-important&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">html</span><span class="o">.</span><span class="n">html_safe</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E na view ficou simplesmente assim:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @models.each </span><span class="k">do</span> <span class="o">|</span><span class="n">my_model</span><span class="o">|</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  &lt;%= has_photo(my_model) %&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">% end </span><span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E com isso, minhas views ficaram mais simples, limpas.</p>
+
+<p>Para mais detalhes sobre <code>content_tag</code>, é só dar uma olhada na <a href="http://api.rubyonrails.org/">API do Ruby on Rails</a></p>
+
+<p>Pois bem, essa foi uma simples e bem básica dica sobre <em>helper methods</em>. Valews..</p>
+]]></content>
+  </entry>
   
 </feed>
