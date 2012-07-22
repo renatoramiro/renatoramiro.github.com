@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | RenatoRamiro]]></title>
   <link href="http://renatoramiro.github.com/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://renatoramiro.github.com/"/>
-  <updated>2012-07-21T17:43:53-03:00</updated>
+  <updated>2012-07-22T14:31:48-03:00</updated>
   <id>http://renatoramiro.github.com/</id>
   <author>
     <name><![CDATA[Renato Ramiro]]></name>
@@ -19,11 +19,6 @@
     <updated>2012-07-21T15:59:00-03:00</updated>
     <id>http://renatoramiro.github.com/blog/2012/07/21/utilizando-helper-methods-em-rails</id>
     <content type="html"><![CDATA[<p>Esta é uma simples e rápida dica sobre <em>helper methods</em>.</p>
-
-<h2>Motivo</h2>
-
-<p>Precisei utilizar um método helper porque estava utilizando
-um mesmo trecho de código em vários locais e estava poluindo um pouco minhas views.</p>
 
 <h2>O que é um helper?</h2>
 
